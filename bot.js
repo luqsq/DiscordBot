@@ -50,8 +50,3 @@ readdirSync('./cron').forEach(file => {
 });
 
 client.login(env.TOKEN);
-
-/*
-    TODO:
-    - rankingi cron, czyszczenie dzisiejszych wiad, dodawanie wygranego do bazy
-*/
