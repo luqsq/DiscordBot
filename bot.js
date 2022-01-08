@@ -1,0 +1,55 @@
+const { Client, Intents, Collection } = require('discord.js');
+const { readdirSync } = require('fs');
+const { createConnection } = require('mysql2/promise');
+const { schedule } = require('node-cron');
+
+require('dotenv').config();
+const { env } = process;
+
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+    ]
+});
+
+var mysql;
+(async () => {
+
+    mysql = await createConnection({
+        host: env.DB_HOST,
+        user: env.DB_USER,
+        password: env.DB_PASSWORD,
+        database: env.DB_NAME
+    });
+
+})();
+
+client.prefix = '!';
+client.commands = new Collection();
+readdirSync('./commands').forEach(folder => {
+    readdirSync(`./commands/${folder}`).forEach(file => {
+        const cmd = require(`./commands/${folder}/${file}`);
+        cmd.type = folder;
+        client.commands.set(cmd.name, cmd);
+    });
+});
+
+readdirSync('./events').forEach(file => {
+    const event = require(`./events/${file}`);
+    client.on(event.event, (p1, p2) => event.run(client, mysql, p1, p2));
+});
+
+readdirSync('./cron').forEach(file => {
+    const cron = require(`./cron/${file}`);
+    schedule(cron.schedule, () => cron.run(client, mysql));
+});
+
+client.login(env.TOKEN);
+
+/*
+    TODO:
+    - rankingi cron, czyszczenie dzisiejszych wiad, dodawanie wygranego do bazy
+*/
