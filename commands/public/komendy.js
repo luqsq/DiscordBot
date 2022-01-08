@@ -10,7 +10,10 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL({ format: 'png', size: 64 }));
 
         client.commands.filter(cmd => cmd.type == 'public' && !cmd.hidden).forEach(cmd => {
-            embed.addField(client.prefix + cmd.name + (cmd.usage == undefined ? '' : ' ' + cmd.usage), cmd.desc);
+            let usage = '', aliases = '';
+            if(cmd.usage != undefined) usage = ' ' + cmd.usage;
+            if(cmd.aliases != undefined) aliases = '\nAliasy: ' + cmd.aliases.join(', ');
+            embed.addField(client.prefix + cmd.name + usage, cmd.desc + aliases);
         });
 
         if(msg.guildId != crewId) return msg.channel.send({embeds:[embed]});
@@ -18,7 +21,10 @@ module.exports = {
         const embedCrew = getEmbed(msg.member).setTitle('Komendy - Discord Administracji').setColor('ff3333');
 
         client.commands.filter(cmd => cmd.type == 'crew' && !cmd.hidden).forEach(cmd => {
-            embedCrew.addField(client.prefix + cmd.name + (cmd.usage == undefined ? '' : ' ' + cmd.usage), cmd.desc);
+            let usage = '', aliases = '';
+            if(cmd.usage != undefined) usage = ' ' + cmd.usage;
+            if(cmd.aliases != undefined) aliases = '\nAliasy: ' + cmd.aliases.join(', ');
+            embedCrew.addField(client.prefix + cmd.name + usage, cmd.desc + aliases);
         });
 
         msg.channel.send({embeds:[embed, embedCrew]});

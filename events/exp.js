@@ -18,7 +18,7 @@ module.exports = {
             let level = row[0].level;
             let exp = row[0].exp + getExp(msg.guildId, msg.member.roles.cache);
             const requiredExp = getRequiredExp(level);
-            if(exp > requiredExp) {
+            if(exp >= requiredExp) {
                 level++;
                 exp -= requiredExp;
                 let info = '';

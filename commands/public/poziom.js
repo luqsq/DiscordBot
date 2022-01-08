@@ -2,6 +2,7 @@ const { getEmbed, getTable, getRequiredExp } = require('../../utils.js');
 
 module.exports = {
     name: 'poziom',
+    aliases: ['lvl', 'rank'],
     usage: '[@nick|id]',
     desc: 'Wyświetla informacje o poziomie użytkownika.',
     run: async (msg, args, client, mysql) => {

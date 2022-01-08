@@ -29,11 +29,13 @@ var mysql;
 
 client.prefix = '!';
 client.commands = new Collection();
+client.aliases = new Collection();
 readdirSync('./commands').forEach(folder => {
     readdirSync(`./commands/${folder}`).forEach(file => {
         const cmd = require(`./commands/${folder}/${file}`);
         cmd.type = folder;
         client.commands.set(cmd.name, cmd);
+        if(cmd.aliases) cmd.aliases.forEach(alias => client.aliases.set(alias, cmd.name));
     });
 });
 
