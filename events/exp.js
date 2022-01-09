@@ -26,8 +26,8 @@ module.exports = {
                     .setAuthor({name: msg.author.username, iconURL: msg.member.displayAvatarURL({dynamic:true})})
                     .setColor('aa8dd7').setTimestamp();
                 if(table == 'public' && lvlRoles[level] != undefined) {
-                    msg.member.roles.remove(Object.values(lvlRoles));
-                    msg.member.roles.add(lvlRoles[level]);
+                    await msg.member.roles.remove(Object.values(lvlRoles));
+                    await msg.member.roles.add(lvlRoles[level]);
                     info = `\nOtrzymuje nową rangę: **${msg.guild.roles.cache.get(lvlRoles[level]).name}**`;
                     embed.setColor('ffd700');
                 }
