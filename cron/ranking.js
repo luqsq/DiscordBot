@@ -30,7 +30,7 @@ const ranking = async (client, mysql, channel, table) => {
 module.exports = {
     schedule: '0 0 * * *',
     run: async (client, mysql) => {
-        //await ranking(client, mysql, publicRankingChannel, 'public');
+        await ranking(client, mysql, publicRankingChannel, 'public');
         await ranking(client, mysql, crewRankingChannel, 'crew');
         await mysql.execute(`UPDATE crew_users, public_users SET crew_users.msgs_today = 0, public_users.msgs_today = 0`);
     }
