@@ -39,6 +39,8 @@ readdirSync('./commands').forEach(folder => {
     });
 });
 
+client.tempbans = new Collection();
+
 readdirSync('./events').forEach(file => {
     const event = require(`./events/${file}`);
     client.on(event.event, (p1, p2) => event.run(client, mysql, p1, p2));
