@@ -66,7 +66,7 @@ module.exports = {
                 .addField('Czas', time.text).addField('Powód', reason).setTimestamp()
         ]});
 
-        msg.react('930194912635400192');
+        msg.react('384327732005306368');
 
     }
 }
