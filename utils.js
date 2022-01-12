@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { crewId, publicId, exp } = require('./config.js');
+const { crewId, publicId, exp, modChannel } = require('./config.js');
 module.exports = {
     getExp: (guild, roles) => {
         let bonus = 1;
@@ -19,5 +19,33 @@ module.exports = {
         if(id == publicId) return 'public';
         else if(id == crewId) return 'crew';
         else return null;
+    },
+    getTime: str => {
+        const type = str[str.length - 1];
+        const value = parseInt(str);
+        if(!value) return null;
+        switch(type) {
+            case 'm':
+                return {time: value * 60, text: `${value} min.`};
+            case 'h':
+                return {time: value * 3600, text: `${value} godz.`};
+            case 'd':
+                return {time: value * 86400, text: `${value} ${value == 1 ? 'dzień' : 'dni'}`};
+            default:
+                return null;
+        }
+    },
+    sendModError: (msg, error) => {
+        if(msg.channelId == modChannel) return msg.channel.send(error);
+        msg.delete();
+        msg.guild.channels.cache.get(modChannel).send({
+            content: `<@${msg.author.id}>`,
+            embeds: [
+                new MessageEmbed().setColor('ee2222').setTimestamp()
+                .setAuthor({ name: msg.author.username, iconURL: msg.member.displayAvatarURL() })
+                .addField(`Wiadomość (#${msg.channel.name}):`, msg.content)
+                .addField('Błąd:', error + '\nPomoc znajdziesz pod `!komendymod`')
+            ]
+        });
     }
 }

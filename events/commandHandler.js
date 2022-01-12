@@ -1,4 +1,4 @@
-const { crewId } = require('../config.js');
+const { crewId, publicId } = require('../config.js');
 
 module.exports = {
     event: 'messageCreate',
@@ -10,6 +10,7 @@ module.exports = {
         const cmd = client.commands.get(cmdname) || client.commands.get(client.aliases.get(cmdname));
         if(cmd) {
             if(msg.guildId != crewId && cmd.type == 'crew') return;
+            if(msg.guildId != publicId && cmd.type == 'moderation') {console.log('asd'); return;}
             cmd.run(msg, args, client, mysql);
         }
     }

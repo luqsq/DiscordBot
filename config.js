@@ -3,6 +3,10 @@ module.exports = {
     publicId: '403602842067402752',
     crewRankingChannel: '358652188706340866',
     publicRankingChannel: '403614180353114112',
+    modChannel: '930132128769921064',
+    modLogChannel: '930132142741135441',
+    maxBanTime: 5,
+    maxMuteTime: 5,
     lvlRoles: {
         5: '929540947186950175',
         10: '929541157262868531',
