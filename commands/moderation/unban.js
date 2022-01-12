@@ -56,6 +56,9 @@ module.exports = {
         }
 
         await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'unban', 0, ?, ${Math.floor(Date.now() / 1000)})`, [reason]);
+        await mysql.execute(`UPDATE punishments SET action = 'tempban' WHERE action = 'tempban_active' AND user_id = '${user.id}'`);
+
+        client.tempbans.delete(user.id);
 
         if(silent == -1) (await client.channels.fetch(modLogChannel)).send({embeds:[
             new MessageEmbed().setColor('33dd33').setTitle('Odbanowano użytkownika')

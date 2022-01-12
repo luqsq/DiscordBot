@@ -1,6 +1,6 @@
 const { tempban } = require('../../permissions.js');
 const { getTime, sendModError } = require('../../utils.js');
-const { modLogChannel } = require('../../config.js');
+const { modLogChannel, maxBanTime } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
@@ -32,6 +32,8 @@ module.exports = {
 
         const time = getTime(args[1]);
         if(!time) return sendModError(msg, 'Niepoprawny format czasu.');
+
+        if(time.time > maxBanTime * 86400) return sendModError(msg, `Maksymalny czas bana to **${maxBanTime} dni**.`);
 
         const reason = args.slice(2).join(' ');
 
