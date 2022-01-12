@@ -21,8 +21,8 @@ const ranking = async (client, mysql, channel, table) => {
     }
     await mysql.execute(`UPDATE ${table}_users SET win_days = win_days + 1 WHERE user_id = '${top[0]}'`);
     return (await client.channels.fetch(channel)).send({embeds:[
-        new MessageEmbed().setColor('ffff00')
-        .addField('Ranking spamerów', `Podczas dzisiejszego dnia zostało wysłanych\n**${data[0].sum}** wiadomości od **${data[0].users}** użytkowników.`)
+        new MessageEmbed().setColor('ffd900')
+        .addField('Ranking spamerów', `Podczas dzisiejszego dnia zostało wysłanych **${data[0].sum}** wiadomości od **${data[0].users}** użytkowników.`)
         .addField('Najlepsi spamerzy:', desc).setThumbnail('https://images.emojiterra.com/google/android-oreo/128px/1f3c5.png')
     ]});
 }
