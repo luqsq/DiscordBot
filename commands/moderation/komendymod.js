@@ -6,7 +6,10 @@ module.exports = {
     hidden: true,
     run: (msg, args, client) => {
 
-        if(msg.channelId != modChannel) return;
+        if(msg.channelId != modChannel) {
+            msg.delete();
+            return;
+        }
 
         const embed = getEmbed(msg.member).setTitle('Komendy - Moderacja').setColor('990000');
 
