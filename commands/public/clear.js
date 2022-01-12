@@ -9,11 +9,12 @@ module.exports = {
         if(args.length == 0) return msg.channel.send(`Nie podano ilości.\nUżycie: \`${client.prefix}clear <ilość>\``);
         const amount = parseInt(args[0]);
         if(isNaN(amount)) return msg.channel.send(`Niepoprawna ilość wiadomości.\nUżycie: \`${client.prefix}clear <ilość>\``);
-        if(amount > 500)return msg.channel.send(`Możesz usunąć maksymalnie **500** wiadomości.`);
-        await msg.channel.bulkDelete(amount+1);
+        if(amount > 100) return msg.channel.send(`Możesz usunąć maksymalnie **100** wiadomości.`);
+        await msg.delete();
+        const msgs = await msg.channel.bulkDelete(amount);
         const clearMsg = await msg.channel.send({embeds:[
             getEmbed(msg.member).setTitle('Usuwanie wiadomości')
-            .setDescription(`Usunięto **${amount}** ostatnich wiadomości`)
+            .setDescription(`Usunięto **${msgs.size}** ostatnich wiadomości`)
         ]});
         setTimeout(() => {
             if(clearMsg.deletable) clearMsg.delete();
