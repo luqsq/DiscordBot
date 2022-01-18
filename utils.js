@@ -47,5 +47,9 @@ module.exports = {
                 .addField('Błąd:', error + '\nPomoc znajdziesz pod `!komendymod`')
             ]
         });
+    },
+    format: d => {
+        const f = n => n <= 9 ? '0' + n : n;
+        return `${f(d.getDate())}.${f(d.getMonth()+1)}.${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
     }
 }

@@ -39,6 +39,13 @@ readdirSync('./commands').forEach(folder => {
     });
 });
 
+client.interactions = new Collection();
+
+readdirSync('./interactions').forEach(file => {
+    const ia = require(`./interactions/${file}`);
+    client.interactions.set(ia.name, ia);
+});
+
 client.tempbans = new Collection();
 
 readdirSync('./events').forEach(file => {
