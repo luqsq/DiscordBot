@@ -5,14 +5,11 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'unmute',
-    usage: '[-s] <@nick|id> <powód>',
+    usage: '<@nick|id> <powód>',
     desc: 'Odcisza danego użytkownika.',
     run: async (msg, args, client, mysql) => {
 
         if(!unmute.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
-
-        const silent = args.indexOf('-s');
-        if(silent != -1) args.splice(silent, 1);
 
         if(args.length < 2) return sendModError(msg, 'Niepoprawne użycie komendy.');
 
@@ -56,7 +53,7 @@ module.exports = {
         now = Math.floor(now / 1000);
         await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${member.id}', '${msg.author.id}', 'unmute', 0, ?, ${now})`, [reason]);
 
-        if(silent == -1) (await client.channels.fetch(modLogChannel)).send({embeds:[
+        (await client.channels.fetch(modLogChannel)).send({embeds:[
             new MessageEmbed().setColor('33dd33').setTitle('Odciszono użytkownika')
                 .setThumbnail(member.displayAvatarURL({ format: 'png', size: 256, dynamic: true }))
                 .addField('Moderator', msg.author.tag).addField('Użytkownik', member.user.tag)

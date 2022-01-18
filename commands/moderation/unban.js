@@ -5,14 +5,11 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'unban',
-    usage: '[-s] <nick#tag|id> <powód>',
+    usage: '<nick#tag|id> <powód>',
     desc: 'Odbanowuje danego użytkownika.',
     run: async (msg, args, client, mysql) => {
 
         if(!unban.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
-
-        const silent = args.indexOf('-s');
-        if(silent != -1) args.splice(silent, 1);
 
         if(args.length < 2) return sendModError(msg, 'Niepoprawne użycie komendy.');
 
@@ -60,7 +57,7 @@ module.exports = {
 
         client.tempbans.delete(user.id);
 
-        if(silent == -1) (await client.channels.fetch(modLogChannel)).send({embeds:[
+        (await client.channels.fetch(modLogChannel)).send({embeds:[
             new MessageEmbed().setColor('33dd33').setTitle('Odbanowano użytkownika')
                 .setThumbnail(user.displayAvatarURL({ format: 'png', size: 256, dynamic: true }))
                 .addField('Moderator', msg.author.tag).addField('Użytkownik', user.tag)
