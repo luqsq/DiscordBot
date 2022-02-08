@@ -34,7 +34,7 @@ module.exports = {
 
         for(let i = 0; i < result.length; i++)
             embed.addField(`[#${result[i].id}] ${format(new Date(result[i].time*1000))} - ${result[i].action == 'tempban_active' ? 'tempban' : result[i].action}`,
-                `**Moderator:** ${(await client.users.fetch(result[i].admin_id)).tag}\n**Koniec kary:** ${format(new Date(result[i].duration*1000))}\n**Powód:** ${result[i].reason}`);
+                `**Moderator:** ${(await client.users.fetch(result[i].admin_id)).tag}\n${result[i].duration == 0 ? '' : `**Koniec kary:** ${format(new Date(result[i].duration*1000))}\n`}**Powód:** ${result[i].reason}`);
 
         const previous = new MessageButton().setCustomId(`history_${args[0]}_${args[1]}_${page-1}`).setStyle(1).setEmoji('⬅️').setLabel('Poprzednia');
         const next = new MessageButton().setCustomId(`history_${args[0]}_${args[1]}_${page+1}`).setStyle(1).setEmoji('➡️').setLabel('Następna');
