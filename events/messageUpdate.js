@@ -11,7 +11,7 @@ module.exports = {
             .setTitle('Edytowano wiadomość').addField('Użytkownik', msg2.member.toString())
             .addField('Stara treść', msg1.content ? msg1.content : '*Pusta*')
             .addField('Nowa treść', msg2.content ? msg2.content : '*Pusta*')
-            .addField('Kanał', msg2.channel.name).setColor('d3a13b').setTimestamp()
+            .addField('Kanał', `${msg2.channel.toString()} (#${msg2.channel.name})`).setColor('d3a13b').setTimestamp()
         ]});
     }
 }

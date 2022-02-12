@@ -9,7 +9,7 @@ module.exports = {
             new MessageEmbed().setAuthor({ name: msg.author.tag, iconURL: msg.member.displayAvatarURL() })
             .setTitle('Usunięto wiadomość').addField('Użytkownik', msg.member.toString())
             .addField('Treść', msg.content ? msg.content : '*Pusta*')
-            .addField('Kanał', msg.channel.name).setColor('ca3333').setTimestamp()
+            .addField('Kanał', `${msg.channel.toString()} (#${msg.channel.name})`).setColor('ca3333').setTimestamp()
         ]});
     }
 }
