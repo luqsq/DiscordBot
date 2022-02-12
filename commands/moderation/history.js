@@ -1,6 +1,6 @@
 const { history } = require('../../permissions.js');
 const { modChannel } = require('../../config.js');
-const { getEmbed, format } = require('../../utils.js');
+const { getPermLvl, getEmbed, format } = require('../../utils.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
         
         if(msg.channel.id != modChannel) return;
 
-        if(!history.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
+        if(getPermLvl(msg.member.roles.cache) < history) return msg.channel.send('Nie masz uprawnień.');
 
         if(args.length == 0) return msg.channel.send('Nie podano użytkownika.');
 

@@ -1,5 +1,5 @@
 const { kick } = require('../../permissions.js');
-const { sendModError } = require('../../utils.js');
+const { getPermLvl, sendModError } = require('../../utils.js');
 const { modLogChannel } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
@@ -9,7 +9,7 @@ module.exports = {
     desc: 'Wyrzuca użytkownika z serwera.',
     run: async (msg, args, client, mysql) => {
         
-        if(!kick.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
+        if(getPermLvl(msg.member.roles.cache) < kick) return msg.channel.send('Nie masz uprawnień.');
 
         if(args.length < 2) return sendModError(msg, 'Niepoprawne użycie komendy.');
 

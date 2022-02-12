@@ -1,5 +1,5 @@
 const { unmute } = require('../../permissions.js');
-const { sendModError } = require('../../utils.js');
+const { getPermLvl, sendModError } = require('../../utils.js');
 const { modLogChannel } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
@@ -9,7 +9,7 @@ module.exports = {
     desc: 'Odcisza danego użytkownika.',
     run: async (msg, args, client, mysql) => {
 
-        if(!unmute.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
+        if(getPermLvl(msg.member.roles.cache) < unmute) return msg.channel.send('Nie masz uprawnień.');
 
         if(args.length < 2) return sendModError(msg, 'Niepoprawne użycie komendy.');
 

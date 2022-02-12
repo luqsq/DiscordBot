@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
 const { crewId, publicId, exp, modChannel } = require('./config.js');
+const { permLvl } = require('./permissions.js');
 module.exports = {
     getExp: (guild, roles) => {
         let bonus = 1;
@@ -51,5 +52,24 @@ module.exports = {
     format: d => {
         const f = n => n <= 9 ? '0' + n : n;
         return `${f(d.getDate())}.${f(d.getMonth()+1)}.${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
+    },
+    getPermLvl: roles => {
+        let max = 0;
+        roles.forEach(r => {
+            const plvl = permLvl[r.id];
+            if(!plvl) return;
+            if(max < plvl.lvl) max = plvl.lvl;
+        });
+        return max;
+    },
+    getPermLvlNameType: (roles, type) => {
+        let max = { lvl: 0 };
+        roles.forEach(r => {
+            const plvl = permLvl[r.id];
+            if(plvl)
+            if(plvl.type == type || plvl.type == 0)
+            if(max.lvl < plvl.lvl) max = { lvl: plvl.lvl, name: r.name };
+        });
+        return max;
     }
 }

@@ -1,5 +1,5 @@
 const { mute } = require('../../permissions.js');
-const { getTime, sendModError } = require('../../utils.js');
+const { getPermLvl, getTime, sendModError } = require('../../utils.js');
 const { modLogChannel, maxMuteTime } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
@@ -9,7 +9,7 @@ module.exports = {
     desc: 'Wycisza użytkownika na podany czas.',
     run: async (msg, args, client, mysql) => {
         
-        if(!mute.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
+        if(getPermLvl(msg.member.roles.cache) < mute) return msg.channel.send('Nie masz uprawnień.');
 
         if(args.length < 3) return sendModError(msg, 'Niepoprawne użycie komendy.');
 

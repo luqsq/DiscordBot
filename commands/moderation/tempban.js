@@ -1,5 +1,5 @@
 const { tempban } = require('../../permissions.js');
-const { getTime, sendModError } = require('../../utils.js');
+const { getPermLvl, getTime, sendModError } = require('../../utils.js');
 const { modLogChannel, maxBanTime } = require('../../config.js');
 const { MessageEmbed } = require('discord.js');
 
@@ -10,7 +10,7 @@ module.exports = {
     desc: 'Banuje użytkownika na podany czas.',
     run: async (msg, args, client, mysql) => {
         
-        if(!tempban.includes(msg.member.roles.highest.id)) return msg.channel.send('Nie masz uprawnień.');
+        if(getPermLvl(msg.member.roles.cache) < tempban) return msg.channel.send('Nie masz uprawnień.');
 
         if(args.length < 2) return sendModError(msg, 'Niepoprawne użycie komendy.');
 

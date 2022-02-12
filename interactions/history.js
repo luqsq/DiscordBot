@@ -1,15 +1,9 @@
-const { history } = require('../permissions.js');
 const { getEmbed, format } = require('../utils.js');
 const { MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
     name: 'history',
     run: async (ia, args, client, mysql) => {
-
-        if(!history.includes(ia.member.roles.highest.id)) return ia.reply({
-            content: 'Nie masz uprawnień.',
-            ephemeral: true
-        });
 
         if(ia.user.id != args[0]) return ia.reply({
             content: 'Nie możesz tego użyć.',
