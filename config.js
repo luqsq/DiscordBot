@@ -3,6 +3,8 @@ module.exports = {
     publicId: '403602842067402752',
     crewRankingChannel: '358652188706340866',
     publicRankingChannel: '403614180353114112',
+    supportCategory: 'xxxx',
+    supportRole: 'xxxx',
     logChannel: '822499650199879750',
     modChannel: '458307082353901612',
     modLogChannel: '931188546193207356',
@@ -27,6 +29,8 @@ module.exports = {
         max: 25,
         sposnorBonus: 1.2,
         sponsorPlusBonus: 1.5,
+    },
+    roles: {
         sponsorId: '457808131913678858',
         sponsorPlusId: '457808182064971805',
         publicNitroBoosterId: '585529338401652747',
