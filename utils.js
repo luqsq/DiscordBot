@@ -1,16 +1,16 @@
 const { MessageEmbed } = require('discord.js');
-const { crewId, publicId, exp, modChannel } = require('./config.js');
+const { crewId, publicId, exp, roles, modChannel } = require('./config.js');
 const { permLvl } = require('./permissions.js');
 module.exports = {
-    getExp: (guild, roles) => {
+    getExp: (guild, roles1) => {
         let bonus = 1;
         if(guild == publicId) {
-            if(roles.has(exp.sponsorPlusId)) bonus = exp.sponsorPlusBonus;
-            else if(roles.has(exp.sponsorId)) bonus = exp.sposnorBonus;
-            if(roles.has(exp.publicNitroBoosterId)) bonus += 0.1;
+            if(roles1.has(roles.sponsorPlusId)) bonus = exp.sponsorPlusBonus;
+            else if(roles1.has(roles.sponsorId)) bonus = exp.sposnorBonus;
+            if(roles1.has(roles.publicNitroBoosterId)) bonus += 0.1;
         }
         else if(guild == crewId) {
-            if(roles.has(exp.crewNitroBoosterId)) bonus += 0.1;
+            if(roles1.has(roles.crewNitroBoosterId)) bonus += 0.1;
         }
         return Math.floor((Math.random() * (exp.max - exp.min + 1) + exp.min) * bonus);
     },
@@ -49,9 +49,9 @@ module.exports = {
             ]
         });
     },
-    format: d => {
+    format: (d, s = ' ') => {
         const f = n => n <= 9 ? '0' + n : n;
-        return `${f(d.getDate())}.${f(d.getMonth()+1)}.${d.getFullYear()} ${f(d.getHours())}:${f(d.getMinutes())}`;
+        return `${f(d.getDate())}.${f(d.getMonth()+1)}.${d.getFullYear()+s+f(d.getHours())}:${f(d.getMinutes())}`;
     },
     getPermLvl: roles => {
         let max = 0;

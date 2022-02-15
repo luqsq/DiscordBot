@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-const { crewId, publicId, lvlRoles } = require('../config.js');
+const { lvlRoles } = require('../config.js');
 const { getExp, getRequiredExp, getTable } = require('../utils.js');
 
 module.exports = {

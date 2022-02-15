@@ -5,7 +5,7 @@ module.exports = {
     run: (client, mysql, msg) => {
         if(!msg.content.startsWith(client.prefix)) return;
         if(msg.author.bot) return;
-        const args = msg.content.slice(client.prefix.length).split(' ');
+        const args = msg.content.slice(client.prefix.length).split(/ +/);
         const cmdname = args.shift().toLowerCase();
         const cmd = client.commands.get(cmdname) || client.commands.get(client.aliases.get(cmdname));
         if(cmd) {
