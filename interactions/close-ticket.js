@@ -22,7 +22,7 @@ module.exports = {
         }
         text = text.slice(text.indexOf('<br>\n') + 5, -6);
         text = text.slice(text.indexOf('<br>\n') + 5);
-        writeFileSync(`/var/www/html/teamtools/supportchat/${id}.html`, text);
+        writeFileSync(`/home/discordbot/supportchat/${id}.html`, text);
         await mysql.execute(`UPDATE tickets SET end_timestamp = ${parseInt(Date.now()/1000)} WHERE id = ${id}`);
         chn.delete();
     }
