@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton, MessageSelectMenu } = require('discord.js');
+const { MessageActionRow, MessageButton } = require('discord.js');
 const { getEmbed } = require('../utils.js');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
         
         const userId = ia.user.id;
         if(args[1] != userId) return ia.reply({
-            content: `Tylko <@${userId}> może tego użyć.`,
+            content: `Tylko <@${args[1]}> może tego użyć.`,
             ephemeral: true
         });
 
