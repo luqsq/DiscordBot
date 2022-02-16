@@ -3,7 +3,7 @@ const { getEmbed } = require('../../utils.js');
 
 module.exports = {
     name: 'shiba',
-    desc: 'Zobacz losowe zdjęcię shiby.',
+    desc: 'Zobacz losowe zdjęcie shiby.',
     run: msg => {
         const req = request({
             hostname: 'shibe.online',
