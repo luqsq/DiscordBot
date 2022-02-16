@@ -1,4 +1,5 @@
 .env
 /node_modules
+/supportchat
 package-lock.json
 package.json
