@@ -40,9 +40,9 @@ module.exports = {
                     ],
                     components: [
                         new MessageActionRow().setComponents(
-                            new MessageButton().setCustomId('open-ticket_1').setEmoji('id').setStyle(1).setLabel('Serwer'),
-                            new MessageButton().setCustomId('open-ticket_4').setEmoji('id').setStyle(1).setLabel('Forum'),
-                            new MessageButton().setCustomId('open-ticket_5').setEmoji('id').setStyle(1).setLabel('Inne')
+                            new MessageButton().setCustomId('open-ticket_1').setStyle(1).setLabel('Serwer'),
+                            new MessageButton().setCustomId('open-ticket_4').setStyle(1).setLabel('Forum'),
+                            new MessageButton().setCustomId('open-ticket_5').setStyle(1).setLabel('Inne')
                         )
                     ]
                 });
