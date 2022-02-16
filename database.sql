@@ -34,6 +34,7 @@ CREATE TABLE `punishments` (
 CREATE TABLE `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(20) COLLATE utf8_polish_ci NOT NULL,
+  `admin_id` varchar(20) COLLATE utf8_polish_ci NOT NULL,
   `start_timestamp` int(11) NOT NULL,
   `end_timestamp` int(11) NOT NULL,
   `type` tinyint(1) NOT NULL,

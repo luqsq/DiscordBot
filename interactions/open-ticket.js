@@ -23,7 +23,7 @@ module.exports = {
                 type: 'role'
             });
         });
-        await mysql.execute(`INSERT INTO tickets VALUES (NULL, '${ia.member.id}', ${parseInt(Date.now()/1000)}, 0, ${args[0]}, 0)`);
+        await mysql.execute(`INSERT INTO tickets VALUES (NULL, '${ia.member.id}', '', ${parseInt(Date.now()/1000)}, 0, ${args[0]}, 0)`);
         const [result] = await mysql.execute('SELECT LAST_INSERT_ID() AS id');
         const chn = await (await client.channels.fetch(supportCategory)).createChannel(
             ia.user.username, { topic: `#${result[0].id}`, permissionOverwrites: perms }
