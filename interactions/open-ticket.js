@@ -34,7 +34,7 @@ module.exports = {
             content: `${ia.member.toString()} / <@&${supportRole}>`,
             embeds: [
                 new MessageEmbed().setTitle('Oto nowy kanał pomocy!').setColor('aa8dd7').setTimestamp()
-                .setDescription('Opisz swój problem, a administracja Ci pomoże!\nAby zamknąć zgłoszenie, kliknij w poniższy przycisk.')
+                .setDescription('Opisz swój problem i czekaj na odpowiedź administracji!\nPamiętaj, że nie zawsze jest ktoś z administracji, kto zajmuje się aktualnie kanałem pomocy.\nAby zamknąć zgłoszenie, kliknij w poniższy przycisk.')
             ],
             components: [
                 new MessageActionRow().setComponents(
