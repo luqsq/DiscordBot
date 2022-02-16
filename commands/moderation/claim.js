@@ -1,5 +1,5 @@
 const { support, claimLvl, permLvl } = require('../../permissions.js');
-const { getPermLvlNameType } = require('../../utils.js');
+const { getPermLvlName, getPermLvlNameType } = require('../../utils.js');
 const { supportCategory } = require('../../config.js');
 
 module.exports = {
@@ -14,22 +14,28 @@ module.exports = {
         const [result] = await mysql.execute(`SELECT user_id, type FROM tickets WHERE id = ${id}`);
         let {type} = result[0];
 
-        const plvl = getPermLvlNameType(msg.member.roles.cache, type);
+        let plvl;
+        if(type < 4) plvl = getPermLvlNameType(msg.member.roles.cache, type);
+        else plvl = getPermLvlName(msg.member.roles.cache);
         let {lvl} = plvl;
         let {name} = plvl;
 
         if(lvl < support) return msg.channel.send('Nie masz uprawnień.');
 
-        let p;
+        let p = Object.entries(permLvl);
         if(args.length > 0 && lvl >= claimLvl) {
             if(isNaN(args[0])) return msg.channel.send('Wpisano nieprawidłową liczbę.');
             lvl = parseInt(args[0]);
-            p = Object.entries(permLvl).filter(r => r[1].lvl >= lvl && (r[1].type == type || r[1].type == 0));
+            if(type < 4) p = p.filter(r => r[1].lvl >= lvl && (r[1].type == type || r[1].type == 0));
+            else p = p.filter(r => r[1].lvl >= lvl);
             let min = {lvl:100};
             p.forEach(r => { if(r[1].lvl < min.lvl) min = {lvl:r[1].lvl,id:r[0]}; });
             name = (await msg.guild.roles.fetch(min.id)).name;
         }
-        else { p = Object.entries(permLvl).filter(r => r[1].lvl >= lvl && (r[1].type == type || r[1].type == 0)); }
+        else { 
+            if(type < 4) p = p.filter(r => r[1].lvl >= lvl && (r[1].type == type || r[1].type == 0));
+            else p = p.filter(r => r[1].lvl >= lvl);
+        }
 
         const perms = [{
             id: msg.guild.roles.everyone.id,

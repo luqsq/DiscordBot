@@ -62,6 +62,15 @@ module.exports = {
         });
         return max;
     },
+    getPermLvlName: roles => {
+        let max = { lvl: 0 };
+        roles.forEach(r => {
+            const plvl = permLvl[r.id];
+            if(plvl)
+            if(max.lvl < plvl.lvl) max = { lvl: plvl.lvl, name: r.name };
+        });
+        return max;
+    },
     getPermLvlNameType: (roles, type) => {
         let max = { lvl: 0 };
         roles.forEach(r => {

@@ -14,7 +14,9 @@ module.exports = {
             allow: 'VIEW_CHANNEL',
             type: 'member'
         }];
-        Object.entries(permLvl).filter(r => r[1].type == args[0] || r[1].type == 0).forEach(r => {
+        let roles = Object.entries(permLvl);
+        if(args[0] < 4) roles = roles.filter(r => r[1].type == args[0] || r[1].type == 0);
+        roles.forEach(r => {
             perms.push({
                 id: r[0],
                 allow: 'VIEW_CHANNEL',
