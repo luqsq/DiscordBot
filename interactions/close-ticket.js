@@ -1,4 +1,5 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
+const { writeFileSync } = require('fs');
 const { supportLogChannel } = require('../config.js');
 const { format } = require('../utils.js');
 
