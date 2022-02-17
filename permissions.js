@@ -26,6 +26,6 @@ module.exports = {
     tempban: 3,
     unban: 3,
     history: 2,
-    support: 3,
-    claimLvl: 6
+    support: 2,
+    claimLvl: 3
 }
