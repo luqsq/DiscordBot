@@ -36,7 +36,7 @@ module.exports = {
                 msg.channel.send({
                     embeds: [
                         new MessageEmbed().setAuthor({ name: 'Crafted.pl - Wsparcie', iconURL: client.user.displayAvatarURL() })
-                        .setDescription('Wybierz kategorię, klikając odpowiedni przycisk,\naby utworzyć nowy kanał pomocy!\n\nUwaga! Pamiętaj, że nie zawsze jest ktoś z administracji, kto zajmuje się aktualnie kanałem pomocy.').setColor('aa8dd7')
+                        .setDescription('Wybierz kategorię, klikając odpowiedni przycisk,\naby utworzyć nowy kanał pomocy!\n\n**Uwaga!**\nPamiętaj, że nie zawsze jest ktoś z administracji, kto zajmuje się aktualnie kanałem pomocy.\n\n**Wybierz temat rozmowy:**').setColor('aa8dd7')
                     ],
                     components: [
                         new MessageActionRow().setComponents(
