@@ -5,7 +5,7 @@ module.exports = {
     publicRankingChannel: '403614180353114112',
     supportCategory: '943169768876277813',
     supportRole: '943447343536144495',
-    supportLogChannel: 'x',
+    supportLogChannel: '943828964990926848',
     logChannel: '822499650199879750',
     modChannel: '458307082353901612',
     modLogChannel: '931188546193207356',
