@@ -6,6 +6,10 @@ module.exports = {
     name: 'open-ticket',
     run: async (ia, args, client, mysql) => {
         const perms = [{
+            id: client.user.id,
+            allow: 'VIEW_CHANNEL',
+            type: 'member'
+        },{
             id: ia.guild.roles.everyone.id,
             deny: 'VIEW_CHANNEL',
             type: 'role'
