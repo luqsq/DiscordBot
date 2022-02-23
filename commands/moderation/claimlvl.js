@@ -38,6 +38,10 @@ module.exports = {
         }
 
         const perms = [{
+            id: client.user.id,
+            allow: 'VIEW_CHANNEL',
+            type: 'member'
+        },{
             id: msg.guild.roles.everyone.id,
             deny: 'VIEW_CHANNEL',
             type: 'role'
