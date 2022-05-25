@@ -1,6 +1,6 @@
 const { Client, Intents, Collection } = require('discord.js');
 const { readdirSync } = require('fs');
-const { createConnection } = require('mysql2/promise');
+const { createPool } = require('mysql2/promise');
 const { schedule } = require('node-cron');
 
 require('dotenv').config();
@@ -23,12 +23,15 @@ const client = new Client({
 var mysql;
 (async () => {
 
-    mysql = await createConnection({
+    mysql = await createPool({
         host: env.DB_HOST,
         user: env.DB_USER,
         password: env.DB_PASSWORD,
-        database: env.DB_NAME
-    });
+        database: env.DB_NAME,
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0
+      });
 
 })();
 
