@@ -6,6 +6,7 @@ module.exports = {
     run: async (client, mysql, msg1, msg2) => {
         if(msg1.guild.id != publicId) return;
         if(msg1.author.bot) return;
+        if(msg1.content == msg2.content) return;
         (await client.channels.fetch(logChannel)).send({embeds:[
             new MessageEmbed().setAuthor({ name: msg2.author.tag, iconURL: msg2.member.displayAvatarURL() })
             .setTitle('Edytowano wiadomość').addField('Użytkownik', msg2.member.toString())
