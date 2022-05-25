@@ -24,8 +24,8 @@ module.exports = {
             user = msg.mentions.users.first();
         }
 
-        if(user == undefined) return msg.channel.send(msg, 'Nie znaleziono użytkownika.');
-        if(!args[0].includes(user.id)) return msg.channel.send(msg, 'Nie znaleziono użytkownika.');
+        if(user == undefined) return msg.channel.send('Nie znaleziono użytkownika.');
+        if(!args[0].includes(user.id)) return msg.channel.send('Nie znaleziono użytkownika.');
 
         let page = parseInt(args[1]);
         if(!page) page = 1;
