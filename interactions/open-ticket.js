@@ -28,7 +28,7 @@ module.exports = {
             });
         });
         await mysql.execute(`INSERT INTO tickets VALUES (NULL, '${ia.member.id}', '', ${parseInt(Date.now()/1000)}, 0, ${args[0]}, 0)`);
-        const [result] = await mysql.execute('SELECT LAST_INSERT_ID() AS id');
+        const [result] = await mysql.execute('SELECT id FROM tickets ORDER BY id DESC LIMIT 1');
         const chn = await (await client.channels.fetch(supportCategory)).createChannel(
             `${ia.user.username}-pomoc`, { topic: `#${result[0].id}`, permissionOverwrites: perms }
         );
