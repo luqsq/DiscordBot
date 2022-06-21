@@ -73,7 +73,6 @@ module.exports = {
                 
             case 'version':
                 msg.channel.send(client.version);
-                process.exit(0);
                 return;
             
             default:
