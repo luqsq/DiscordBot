@@ -1,6 +1,6 @@
 module.exports = {
     event: 'ready',
-    run: () => {
-        console.log('Bot aktywny, wersja v1.2.4');
+    run: (client) => {
+        console.log('Bot aktywny, wersja v' + client.version);
     }
 }
