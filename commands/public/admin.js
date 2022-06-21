@@ -70,6 +70,11 @@ module.exports = {
                 msg.channel.send('Restartowanie bota...');
                 process.exit(0);
                 return;
+                
+            case 'version':
+                msg.channel.send(client.version);
+                process.exit(0);
+                return;
             
             default:
                 msg.channel.send('**Dostępne opcje:**\nlvl, listarang, support, permlvl, perms, reboot');
