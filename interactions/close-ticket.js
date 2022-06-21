@@ -24,6 +24,7 @@ module.exports = {
         }
         text = text.slice(text.indexOf('<br>\n') + 5, -6);
         text = text.slice(text.indexOf('<br>\n') + 5);
+        chn.delete();
         writeFileSync(`/home/discordbot/supportchat/${id}.html`, text);
         await mysql.execute(`UPDATE tickets SET end_timestamp = ${parseInt(Date.now()/1000)} WHERE id = ${id}`);
         const [result] = await mysql.execute(`SELECT user_id, admin_id, start_timestamp FROM tickets WHERE id = ${id}`);
@@ -36,6 +37,5 @@ module.exports = {
             .addField('Supporter', supporter, true).addField('Zamknął', `**${ia.user.tag}**\n*(UID: ${ia.user.id})*`, true)
             .addField('ID Zgłoszenia', `#${id}`, true).setColor('aa8dd7').setTimestamp()
         ]});
-        chn.delete();
     }
 }
