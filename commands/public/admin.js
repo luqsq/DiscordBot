@@ -66,8 +66,13 @@ module.exports = {
                 });
                 return;
             
+            case 'reboot':
+                msg.channel.send('Restartowanie bota...');
+                process.exit(0);
+                return;
+            
             default:
-                msg.channel.send('**Dostępne opcje:**\nlvl, listarang, support, permlvl, perms');
+                msg.channel.send('**Dostępne opcje:**\nlvl, listarang, support, permlvl, perms, reboot');
                 
         }
     }
