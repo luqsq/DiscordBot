@@ -2,7 +2,7 @@ module.exports = {
     name: 'wakacje',
     desc: 'Za ile wakacje (lub koniec)...?',
     run: msg => {
-        const today = new Date(2023, 5, 24);
+        const today = new Date();
         const unix = today.getTime();
         const year = today.getFullYear() + (today.getMonth() > 7 ? 1 : 0);
         const date = new Date(year, 6, 0, 12);
