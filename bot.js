@@ -36,7 +36,7 @@ var mysql;
 })();
 
 client.prefix = '!';
-client.version = '1.2.4';
+client.version = '1.2.5';
 client.commands = new Collection();
 client.aliases = new Collection();
 readdirSync('./commands').forEach(folder => {
