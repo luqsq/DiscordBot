@@ -5,6 +5,11 @@ const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 module.exports = {
     name: 'open-ticket',
     run: async (ia, args, client, mysql) => {
+        const [r] = await mysql.query(`SELECT id FROM tickets WHERE user_id = '${ia.member.id}' AND start_timestamp + 300 > ${parseInt(Date.now()/1000)} AND end_timestamp = 0`);
+        if(r.length != 0) return ia.reply({
+            content: `Posiadasz już kanał pomocy.`,
+            ephemeral: true
+        });
         const perms = [{
             id: client.user.id,
             allow: 'VIEW_CHANNEL',
@@ -27,8 +32,8 @@ module.exports = {
                 type: 'role'
             });
         });
-        await mysql.execute(`INSERT INTO tickets VALUES (NULL, '${ia.member.id}', '', ${parseInt(Date.now()/1000)}, 0, ${args[0]}, 0)`);
-        const [result] = await mysql.execute('SELECT id FROM tickets ORDER BY id DESC LIMIT 1');
+        await mysql.query(`INSERT INTO tickets VALUES (NULL, '${ia.member.id}', '', ${parseInt(Date.now()/1000)}, 0, ${args[0]}, 0)`);
+        const [result] = await mysql.query('SELECT id FROM tickets ORDER BY id DESC LIMIT 1');
         const chn = await (await client.channels.fetch(supportCategory)).createChannel(
             `${ia.user.username}-pomoc`, { topic: `#${result[0].id}`, permissionOverwrites: perms }
         );
