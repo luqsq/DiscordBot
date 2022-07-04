@@ -11,7 +11,7 @@ module.exports = {
 
         const id = msg.channel.topic.slice(1);
 
-        const [result] = await mysql.execute(`SELECT user_id, type FROM tickets WHERE id = ${id}`);
+        const [result] = await mysql.query(`SELECT user_id, type FROM tickets WHERE id = ${id}`);
         let {type} = result[0];
 
         let plvl;
@@ -62,7 +62,7 @@ module.exports = {
         await msg.channel.edit({ permissionOverwrites: perms });
         await msg.channel.send(`Kanał jest teraz widoczny dla rangi **${name}** i wyższych.`);
 
-        await mysql.execute(`UPDATE tickets SET perm_lvl = ${lvl} WHERE id = ${id}`);
+        await mysql.query(`UPDATE tickets SET perm_lvl = ${lvl} WHERE id = ${id}`);
 
     }
 }

@@ -10,7 +10,7 @@ module.exports = {
             ephemeral: true
         });
 
-        const [total] = await mysql.execute(`SELECT COUNT(id) AS count FROM punishments WHERE user_id = '${args[1]}'`);
+        const [total] = await mysql.query(`SELECT COUNT(id) AS count FROM punishments WHERE user_id = '${args[1]}'`);
         const pages = Math.ceil(total[0].count/5);
         const page = parseInt(args[2]);
 
@@ -24,7 +24,7 @@ module.exports = {
         }
         else embed.setDescription(`Strona **${page}** z **${pages}**.`);
         
-        const [result] = await mysql.execute(`SELECT * FROM punishments WHERE user_id = '${args[1]}' ORDER BY time DESC LIMIT ${(page-1)*5}, 5`);
+        const [result] = await mysql.query(`SELECT * FROM punishments WHERE user_id = '${args[1]}' ORDER BY time DESC LIMIT ${(page-1)*5}, 5`);
 
         for(let i = 0; i < result.length; i++)
             embed.addField(`[#${result[i].id}] ${format(new Date(result[i].time*1000))} - ${result[i].action == 'tempban_active' ? 'tempban' : result[i].action}`,

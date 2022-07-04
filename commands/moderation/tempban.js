@@ -41,7 +41,7 @@ module.exports = {
         const now = Math.floor(Date.now() / 1000);
         const duration = now+time.time;
 
-        await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'tempban_active', ${duration}, ?, ${now})`, [reason]);
+        await mysql.query(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'tempban_active', ${duration}, ?, ${now})`, [reason]);
         client.tempbans.set(user.id, duration * 1000);
 
         try {

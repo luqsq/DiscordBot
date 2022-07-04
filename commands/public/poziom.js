@@ -17,12 +17,12 @@ module.exports = {
         }
         const table = getTable(msg.guildId);
         if(!table) return;
-        const [result] = await mysql.execute(`SELECT exp, level FROM ${table}_users WHERE user_id = '${user.id}'`);
+        const [result] = await mysql.query(`SELECT exp, level FROM ${table}_users WHERE user_id = '${user.id}'`);
         if(result.length == 0) return msg.channel.send(`Brak danych o użytkowniku.`);
         const requiredExp = getRequiredExp(result[0].level);
         let progress = '🟪'.repeat(Math.floor(result[0].exp/requiredExp*15));
         progress += '⬜'.repeat(15 - progress.length/2);
-        const [users] = await mysql.execute(`SELECT user_id FROM ${table}_users WHERE level > ${result[0].level} || (level = ${result[0].level} && exp > ${result[0].exp})`);
+        const [users] = await mysql.query(`SELECT user_id FROM ${table}_users WHERE level > ${result[0].level} || (level = ${result[0].level} && exp > ${result[0].exp})`);
         for(let i = 0; i < users.length; i++) users[i] = users[i].user_id;
         const members = await msg.guild.members.fetch({ user: users });
         msg.channel.send({embeds:[

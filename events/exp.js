@@ -8,11 +8,11 @@ module.exports = {
         if(msg.author.bot) return;
         const table = getTable(msg.guildId);
         if(!table) return;
-        const [row] = await mysql.execute(`SELECT exp, level, last_msg FROM ${table}_users WHERE user_id = '${msg.author.id}' LIMIT 1`);
+        const [row] = await mysql.query(`SELECT exp, level, last_msg FROM ${table}_users WHERE user_id = '${msg.author.id}' LIMIT 1`);
         const now = Math.floor(Date.now()/1000);
         if(row.length == 1) {
             if(now - 60 < row[0].last_msg) {
-                await mysql.execute(`UPDATE ${table}_users SET msgs_today = msgs_today + 1, msgs_total = msgs_total + 1 WHERE user_id = '${msg.author.id}'`);
+                await mysql.query(`UPDATE ${table}_users SET msgs_today = msgs_today + 1, msgs_total = msgs_total + 1 WHERE user_id = '${msg.author.id}'`);
                 return;
             }
             let level = row[0].level;
@@ -34,9 +34,9 @@ module.exports = {
                 embed.addField('Lvl Up!', `Użytkownik ${msg.author} awansował na poziom **${level}**!${info}`);
                 msg.channel.send({embeds:[embed]});
             }
-            await mysql.execute(`UPDATE ${table}_users SET exp = ${exp}, level = ${level}, last_msg = ${now}, msgs_today = msgs_today + 1, msgs_total = msgs_total + 1 WHERE user_id = '${msg.author.id}'`);
+            await mysql.query(`UPDATE ${table}_users SET exp = ${exp}, level = ${level}, last_msg = ${now}, msgs_today = msgs_today + 1, msgs_total = msgs_total + 1 WHERE user_id = '${msg.author.id}'`);
             return;
         }
-        await mysql.execute(`INSERT INTO ${table}_users VALUES ('${msg.author.id}', ${getExp(msg.guildId, msg.member.roles.cache)}, 0, ${now}, 1, 1, 0)`);
+        await mysql.query(`INSERT INTO ${table}_users VALUES ('${msg.author.id}', ${getExp(msg.guildId, msg.member.roles.cache)}, 0, ${now}, 1, 1, 0)`);
     }
 }

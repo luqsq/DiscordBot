@@ -56,7 +56,7 @@ module.exports = {
         }
 
         now = Math.floor(now / 1000);
-        await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${member.id}', '${msg.author.id}', 'mute', ${now+time.time}, ?, ${now})`, [reason]);
+        await mysql.query(`INSERT INTO punishments VALUES (NULL, '${member.id}', '${msg.author.id}', 'mute', ${now+time.time}, ?, ${now})`, [reason]);
 
         (await client.channels.fetch(modLogChannel)).send({embeds:[
             new MessageEmbed().setColor('0088ff').setTitle('Wyciszono użytkownika')

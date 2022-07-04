@@ -15,7 +15,7 @@ module.exports = {
             let member;
             if(args.length == 0) member = msg.member;
             else member = msg.mentions.members.first() || await msg.guild.members.fetch(args[0]);
-            const [result] = await mysql.execute(`SELECT msgs_today, msgs_total FROM ${table}_users WHERE user_id = '${member.id}'`);
+            const [result] = await mysql.query(`SELECT msgs_today, msgs_total FROM ${table}_users WHERE user_id = '${member.id}'`);
             let today = 0, total = 0;
             if(result.length == 1) {
                 today = result[0].msgs_today;

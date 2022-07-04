@@ -12,7 +12,7 @@ module.exports = {
                 console.log(e);
             }
             client.tempbans.delete(user);
-            await mysql.execute(`UPDATE punishments SET action = 'tempban' WHERE action = 'tempban_active' AND user_id = '${user}'`);
+            await mysql.query(`UPDATE punishments SET action = 'tempban' WHERE action = 'tempban_active' AND user_id = '${user}'`);
         });;
     }
 }

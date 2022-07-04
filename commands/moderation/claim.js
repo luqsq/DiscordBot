@@ -15,7 +15,7 @@ module.exports = {
         msg.channel.send(`Sprawą zajmuje się **${msg.author.username}**.`);
 
         const id = msg.channel.topic.slice(1);
-        await mysql.execute(`UPDATE tickets SET admin_id = ${msg.author.id} WHERE id = ${id}`);
+        await mysql.query(`UPDATE tickets SET admin_id = ${msg.author.id} WHERE id = ${id}`);
 
     }
 }

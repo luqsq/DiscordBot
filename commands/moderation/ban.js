@@ -32,7 +32,7 @@ module.exports = {
 
         const reason = args.slice(1).join(' ');
 
-        await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'ban', 0, ?, ${Math.floor(Date.now() / 1000)})`, [reason]);
+        await mysql.query(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'ban', 0, ?, ${Math.floor(Date.now() / 1000)})`, [reason]);
 
         try {
             await user.send({embeds:[

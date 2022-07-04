@@ -26,8 +26,8 @@ module.exports = {
         text = text.slice(text.indexOf('<br>\n') + 5);
         chn.delete();
         writeFileSync(`/home/discordbot/supportchat/${id}.html`, text);
-        await mysql.execute(`UPDATE tickets SET end_timestamp = ${parseInt(Date.now()/1000)} WHERE id = ${id}`);
-        const [result] = await mysql.execute(`SELECT user_id, admin_id, start_timestamp FROM tickets WHERE id = ${id}`);
+        await mysql.query(`UPDATE tickets SET end_timestamp = ${parseInt(Date.now()/1000)} WHERE id = ${id}`);
+        const [result] = await mysql.query(`SELECT user_id, admin_id, start_timestamp FROM tickets WHERE id = ${id}`);
         const supporter = result[0].admin_id ? `**${(await client.users.fetch(result[0].admin_id)).tag}**\n*(UID: ${result[0].admin_id})*` : '*Brak*';
         (await client.channels.fetch(supportLogChannel)).send({embeds:[
             new MessageEmbed().setTitle('Zgłoszenie zamknięte')

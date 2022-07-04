@@ -52,8 +52,8 @@ module.exports = {
             console.log(`Nie mozna wyslac wiadomosci do ${user.tag}.`);
         }
 
-        await mysql.execute(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'unban', 0, ?, ${Math.floor(Date.now() / 1000)})`, [reason]);
-        await mysql.execute(`UPDATE punishments SET action = 'tempban' WHERE action = 'tempban_active' AND user_id = '${user.id}'`);
+        await mysql.query(`INSERT INTO punishments VALUES (NULL, '${user.id}', '${msg.author.id}', 'unban', 0, ?, ${Math.floor(Date.now() / 1000)})`, [reason]);
+        await mysql.query(`UPDATE punishments SET action = 'tempban' WHERE action = 'tempban_active' AND user_id = '${user.id}'`);
 
         client.tempbans.delete(user.id);
 

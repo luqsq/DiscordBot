@@ -22,7 +22,7 @@ module.exports = {
             msg.channel.send(`Nie znaleziono takiego użytkownika.\nUżycie: \`${client.prefix}wiadomosci [@nick|id]\``);
             return;
         }
-        const [result] = await mysql.execute(`SELECT exp, level, msgs_total, win_days FROM ${table}_users WHERE user_id = '${member.id}'`);
+        const [result] = await mysql.query(`SELECT exp, level, msgs_total, win_days FROM ${table}_users WHERE user_id = '${member.id}'`);
         if(result.length == 0) return msg.channel.send('Brak danych o użytkowniku.');
         const user = member.user;
         let exp = result[0].exp;
