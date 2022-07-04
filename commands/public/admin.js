@@ -8,7 +8,7 @@ const admins = ['153182055214088192', '387246119371014144'];
 module.exports = {
     name: 'admin',
     hidden: true,
-    run: (msg, args, client) => {
+    run: async (msg, args, client) => {
         if(!admins.includes(msg.author.id)) return msg.channel.send('Nie masz uprawnień.');
         switch(args[0]) {
 
@@ -32,7 +32,7 @@ module.exports = {
                 return;
 
             case 'support':
-                msg.delete();
+                //msg.delete();
                 msg.channel.send({
                     embeds: [
                         new MessageEmbed().setAuthor({ name: 'Crafted.pl - Wsparcie', iconURL: client.user.displayAvatarURL() })
@@ -67,7 +67,7 @@ module.exports = {
                 return;
             
             case 'reboot':
-                msg.channel.send('Restartowanie bota...');
+                await msg.channel.send('Restartowanie bota...');
                 process.exit(0);
                 return;
                 
@@ -76,7 +76,7 @@ module.exports = {
                 return;
             
             default:
-                msg.channel.send('**Dostępne opcje:**\nlvl, listarang, support, permlvl, perms, reboot');
+                msg.channel.send('**Dostępne opcje:**\nlvl, listarang, support, permlvl, perms, reboot, version');
                 
         }
     }
