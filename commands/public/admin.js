@@ -32,7 +32,7 @@ module.exports = {
                 return;
 
             case 'support':
-                //msg.delete();
+                msg.delete();
                 msg.channel.send({
                     embeds: [
                         new MessageEmbed().setAuthor({ name: 'Crafted.pl - Wsparcie', iconURL: client.user.displayAvatarURL() })
